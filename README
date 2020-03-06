@@ -1,0 +1,83 @@
+Ciobanu Alin-Matei 315CB
+
+FunctiiCoada.c:
+- functii specifice pentru lucrul cu cozi
+
+FunctiiStiva.c:
+- functii specifice pentru lucrul cu stive
+
+functiiLG.c:
+- functii cu liste generice : inserare, distrugere lista
+
+functii.c:
+- contine functiile cerute in tema
+
+void *add(void *ca, TProces p) {
+	insereaza in coada procesul dupa anumite crierii
+	returneaza noua coada cu procesul inserat
+}
+
+void get( ) {
+	cauta in coada de asteptare, in coada de procese terminate si in running
+	procesul cu PID-ul dat ca parametru. 
+	}
+
+void push_s() {
+	cauta un proces dupa PID si ii insereaza o cantitate de 4 biti in stiva
+	daca are loc.
+}
+
+void GenereazaListaPid( adresa lista generica, int *nr ) {
+	imi adauga la sfarsit valoarea PID-ului si 0 sau 1 in caz ca PID-ul a fost
+	ocupat sau este liber
+}
+
+void adaugaPID(...) {
+	pentru un proces p primit ca parametru ii atribuie cel mai mic pid liber
+	din lista de pid-uri care este disponibil.
+}
+
+void adaugaInListaMem(...) {
+	imi creez o lista in care bag fiecare proces.
+	ma intereseaza valoarea lui mem_start si mem_size
+	daca este primul element din lista mem_start este 0
+	(inceputul memoriei la care este alocat procesul in sistem)
+	altfel mem_start = mem_start pt procesul precedent + mem_size pt proc.
+	precedent.
+}
+
+void stergeDinListaMem(...) {
+	caut procesul in lista dupa PID si fac o eliminare de celula
+}
+
+void defragmentare(...) {
+	sortez lista de memorie dupa PID-uri actualizand mem_start
+	folosesc un algoritm bubble sort pt sortare
+}
+
+
+tema2.c
+	Daca comanda este "add" citesc atributele procesului, generez lista de
+PID-uri care la fiecare operatie de add adauga un PID disponibil la sfarsitul
+listei, atribui cel mai mic PID disponibil procesului si adaug procesul in
+lista de memorie. Daca nu are loc, realizez o defragmentare, daca nici dupa
+defragmentare nu are loc trec la urmatoarea operatie. Daca se adauga se
+afiseaza mesajul de succes. Daca este primul proces din sistem acesta trece
+direct in starea running, altfel il introduc in coada de asteptare.
+	La run:
+Daca coada de asteptare este goala, am doar procesul din running si daca
+timpul de run este mai mare decat timpul ramas de rulare al procesului
+(care initial este egal cu exec_time) atunci procesul se ruleaza pana isi
+termina activitatea si se adauga in coada de procese terminate, PID-ul sau
+devenind disponibil si este sters din lista de memorie. Daca timpul de run este
+mai mic decat timpul ramas de rulare al procesului atunci actualizez timpii:
+din timpul ramas al procesului scad timpul de run, din timpul de run scad
+cat din cuanta s-a scurs inainte, iar din timpul cuanta ramasa al procesului
+scad cat ruleaza in run-ul curent.
+Daca am mai multe procese, dupa ce procesul curent isi termina executia il
+introduc in coada de procese terminate, extrag primul proces din coada de
+asteptare si se contiuna procesul.
+
+Mentiuni: pe vmchecker nu ruleaza toate testele, ramane blocat la valgrindul
+de la testul 8. Nu afiseaza niciun punctaj. Pe local imi merg toate testele si
+trec si testele cu valgrind 105/85.
